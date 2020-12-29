@@ -1,17 +1,16 @@
-import { useContext } from "react";
+import { useDispatch } from "react-redux";
 
-import { ModalContext } from "../../../components/Modal/ModalContext";
 import Button from "../../../components/Button";
-import NewProcessModal from "./NewProcessModal";
+import { addNewProcessButtonClicked } from '../actions'
 
 const NewProcessButton = () => {
-  const { showModal } = useContext(ModalContext);
+  const dispatch = useDispatch();
 
-  const showNewProcessModal = () => {
-    showModal(NewProcessModal);
+  const onClick = () => {
+    dispatch(addNewProcessButtonClicked());
   };
 
-  return <Button onClick={showNewProcessModal}>+ New Proces</Button>;
+  return <Button onClick={onClick}>+ New Proces</Button>;
 };
 
 export default NewProcessButton;
