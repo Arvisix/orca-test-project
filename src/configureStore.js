@@ -1,44 +1,33 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import { routerMiddleware } from 'connected-react-router';
-import createSagaMiddleware from 'redux-saga';
-import createReducer from './reducers';
+import { createBrowserHistory } from "history";
+import { applyMiddleware, compose, createStore } from "redux";
+import createSagaMiddleware from "redux-saga";
+import { routerMiddleware } from "connected-react-router";
 
-export default function configureStore(initialState = {}, history) {
-  let composeEnhancers = compose;
-  const reduxSagaMonitorOptions = {};
+import createRootReducer from "./rootReducer";
+import rootSaga from "./rootSaga";
 
-  if (process.env.NODE_ENV !== 'production' && typeof window === 'object') {
-    if (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)
-      composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({});
+export const history = createBrowserHistory();
+const sagaMiddleware = createSagaMiddleware();
 
-    if (window.__SAGA_MONITOR_EXTENSION__)
-      reduxSagaMonitorOptions = {
-        sagaMonitor: window.__SAGA_MONITOR_EXTENSION__,
-      };
-  }
-
-  const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);
-
-  const middlewares = [sagaMiddleware, routerMiddleware(history)];
-
-  const enhancers = [applyMiddleware(...middlewares)];
+const configureStore = (preloadedState) => {
+  const composeEnhancer =
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
   const store = createStore(
-    createReducer(),
-    initialState,
-    composeEnhancers(...enhancers),
+    createRootReducer(history),
+    preloadedState,
+    composeEnhancer(applyMiddleware(sagaMiddleware, routerMiddleware(history)))
   );
 
-  // Extensions
-  store.runSaga = sagaMiddleware.run;
-  store.injectedReducers = {}; // Reducer registry
-  store.injectedSagas = {}; // Saga registry
+  sagaMiddleware.run(rootSaga);
 
   if (module.hot) {
-    module.hot.accept('./reducers', () => {
-      store.replaceReducer(createReducer(store.injectedReducers));
+    module.hot.accept("./rootReducer", () => {
+      store.replaceReducer(createRootReducer(history));
     });
   }
 
   return store;
-}
+};
+
+export default configureStore;
