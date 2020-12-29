@@ -1,6 +1,6 @@
 import { AppWrapper, AppHeader } from './Process.styles';
 
-import ProcessesTable from './components/ProcessesTable/ProcessesTable.component'
+import ProcessesTable from './components/ProcessesTable.component'
 
 const ProcessPage = () => {
   return (
