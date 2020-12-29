@@ -1,22 +1,22 @@
-import './App.css';
+import { AppWrapper, AppHeader, AppLink } from './App.styles';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <AppWrapper>
+      <AppHeader>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
+        <AppLink
           className="App-link"
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
         >
           Learn React
-        </a>
-      </header>
-    </div>
+        </AppLink>
+      </AppHeader>
+    </AppWrapper>
   );
 }
 
