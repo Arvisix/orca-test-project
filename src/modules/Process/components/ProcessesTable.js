@@ -1,6 +1,8 @@
 import React from "react";
-
 import { useTable, useSortBy } from "react-table";
+
+import DeleteProcessButton from './DeleteProcessButton';
+import LinkToProcess from './LinkToProcess';
 
 const ProcessesTable = () => {
   const columns = React.useMemo(
@@ -13,6 +15,7 @@ const ProcessesTable = () => {
       {
         Header: "Name",
         accessor: "name",
+        Cell: LinkToProcess,
       },
       {
         Header: "Start Time",
@@ -21,6 +24,11 @@ const ProcessesTable = () => {
       {
         Header: "Jobs Count",
         accessor: "jobsCount",
+      },
+      {
+        Header: () => null,
+        id: 'deleter',
+        Cell: DeleteProcessButton,
       },
     ],
     []
