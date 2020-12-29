@@ -1,8 +1,11 @@
 import React from "react";
+import { useSelector } from 'react-redux'
 import { useTable, useSortBy } from "react-table";
 
+import { StatusCell } from '../../../components/Table'
 import DeleteProcessButton from './DeleteProcessButton';
 import LinkToProcess from './LinkToProcess';
+import { processesSelector } from '../selectors'
 
 const ProcessesTable = () => {
   const columns = React.useMemo(
@@ -11,11 +14,11 @@ const ProcessesTable = () => {
         Header: "Id",
         accessor: "id",
         disableSortBy: true,
+        Cell: LinkToProcess,
       },
       {
         Header: "Name",
         accessor: "name",
-        Cell: LinkToProcess,
       },
       {
         Header: "Start Time",
@@ -26,6 +29,11 @@ const ProcessesTable = () => {
         accessor: "jobsCount",
       },
       {
+        Header: "Status",
+        accessor: "processStatus",
+        Cell: StatusCell
+      },
+      {
         Header: () => null,
         id: 'deleter',
         Cell: DeleteProcessButton,
@@ -34,29 +42,7 @@ const ProcessesTable = () => {
     []
   );
 
-  const data = React.useMemo(
-    () => [
-      {
-        id: 11,
-        name: "first",
-        startTime: "18:00",
-        jobsCount: 2,
-      },
-      {
-        id: 2,
-        name: "second",
-        startTime: "9:00",
-        jobsCount: 3,
-      },
-      {
-        id: 43,
-        name: "third",
-        startTime: "23:00",
-        jobsCount: 5,
-      },
-    ],
-    []
-  );
+  const data = useSelector(processesSelector);
 
   const {
     getTableProps,
