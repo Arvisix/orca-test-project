@@ -1,6 +1,22 @@
 import React from "react";
 
-import { useTable, useSortBy } from "react-table";
+import { useTable, useSortBy, useFilters } from "react-table";
+
+function DefaultColumnFilter({
+  column: { filterValue, preFilteredRows, setFilter },
+}) {
+  const count = preFilteredRows.length
+
+  return (
+    <input
+      value={filterValue || ''}
+      onChange={e => {
+        setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
+      }}
+      placeholder={`Search ${count} records...`}
+    />
+  )
+}
 
 const ProcessesTable = () => {
   const columns = React.useMemo(
@@ -9,18 +25,22 @@ const ProcessesTable = () => {
         Header: "Id",
         accessor: "id",
         disableSortBy: true,
+        disableFilters: true,
       },
       {
         Header: "Name",
         accessor: "name",
+        Filter: DefaultColumnFilter
       },
       {
         Header: "Start Time",
         accessor: "startTime",
+        disableFilters: true,
       },
       {
         Header: "Jobs Count",
         accessor: "jobsCount",
+        disableFilters: true,
       },
     ],
     []
@@ -50,15 +70,13 @@ const ProcessesTable = () => {
     []
   );
 
-  const tableInstance = useTable({ columns, data }, useSortBy);
-
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     rows,
     prepareRow,
-  } = tableInstance;
+  } = useTable({ columns, data }, useFilters, useSortBy);
 
   return (
     <table {...getTableProps()}>
@@ -71,6 +89,7 @@ const ProcessesTable = () => {
                 <span>
                   {column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""}
                 </span>
+                <div>{column.canFilter ? column.render('Filter') : null}</div>
               </th>
             ))}
           </tr>
