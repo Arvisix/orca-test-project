@@ -1,4 +1,4 @@
-import { AppWrapper, AppHeader } from "./Process.styles";
+import { AppWrapper, AppHeader } from "./styles";
 
 import ProcessesTable from "./components/ProcessesTable";
 import NewProcessButton from "./components/NewProcessButton";
