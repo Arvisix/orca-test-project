@@ -7,7 +7,7 @@ import { Switch, Route } from "react-router-dom";
 import "./index.css";
 import configureStore, { history } from "./configureStore";
 import ProcessesPage from "./modules/Process/ProcessPage";
-import JobsPage from "./modules/Job/Job.page";
+import JobsPage from "./modules/Job/JobPage";
 import ModalProvider from "./components/Modal/ModalContext";
 import ModalRoot from "./components/Modal/ModalRoot";
 

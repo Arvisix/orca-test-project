@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import JobTable from './components/JobTable.component'
+import JobTable from './components/JobTable'
 import { jobsPageLoaded } from "./actions";
 
 import { AppWrapper, AppHeader } from './styles';

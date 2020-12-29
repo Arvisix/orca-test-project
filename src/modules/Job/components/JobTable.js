@@ -1,7 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useTable, useFilters } from "react-table";
 
 import ColumnFilter from '../../../components/Table/ColumnFilter'
+import { getJobs } from '../selectors';
 
 const JobTable = () => {
   const columns = React.useMemo(
@@ -30,29 +32,7 @@ const JobTable = () => {
     []
   );
 
-  const data = React.useMemo(
-    () => [
-      {
-        id: 11,
-        processId: 111,
-        name: "first",
-        status: "running",
-      },
-      {
-        id: 112,
-        processId: 1,
-        name: "second",
-        status: "successed",
-      },
-      {
-        id: 113,
-        processId: 11,
-        name: "third",
-        status: "failed",
-      },
-    ],
-    []
-  );
+  const data = useSelector(getJobs)
 
   const {
     getTableProps,
