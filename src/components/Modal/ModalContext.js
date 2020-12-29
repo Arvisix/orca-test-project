@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 
 export const ModalContext = createContext({
   component: null,
+  open: false,
   props: {},
   showModal: () => {},
   hideModal: () => {},
@@ -11,6 +12,7 @@ const ModalProvider = ({ children }) => {
   const showModal = (component, props = {}) => {
     setState({
       ...state,
+      open: true,
       component,
       props,
     });
@@ -19,6 +21,7 @@ const ModalProvider = ({ children }) => {
   const hideModal = () =>
     setState({
       ...state,
+      open: false,
       component: null,
       props: {},
     });
