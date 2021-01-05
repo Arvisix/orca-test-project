@@ -1,11 +1,11 @@
 import React from "react";
-import { useSelector } from 'react-redux'
+import { useSelector } from "react-redux";
 import { useTable, useSortBy } from "react-table";
 
-import { StatusCell } from '../../../components/Table'
-import DeleteProcessButton from './DeleteProcessButton';
-import LinkToProcess from './LinkToProcess';
-import { processesSelector } from '../selectors'
+import { StatusCell } from "../../../components/Table";
+import DeleteProcessButton from "./DeleteProcessButton";
+import LinkToProcess from "./LinkToProcess";
+import { processesSelector } from "../selectors";
 
 const ProcessesTable = () => {
   const columns = React.useMemo(
@@ -31,11 +31,11 @@ const ProcessesTable = () => {
       {
         Header: "Status",
         accessor: "processStatus",
-        Cell: StatusCell
+        Cell: StatusCell,
       },
       {
         Header: () => null,
-        id: 'deleter',
+        id: "deleter",
         Cell: DeleteProcessButton,
       },
     ],

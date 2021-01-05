@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import JobTable from './components/JobTable'
+import JobTable from "./components/JobTable";
 import { jobsPageLoaded } from "./actions";
 
-import { AppWrapper, AppHeader } from './styles';
+import { AppWrapper, AppHeader } from "./styles";
 
-const JobPage = props => {
+const JobPage = (props) => {
   const dispatch = useDispatch();
   const processId = props.match.params.id;
 
@@ -21,6 +21,6 @@ const JobPage = props => {
       </AppHeader>
     </AppWrapper>
   );
-}
+};
 
 export default JobPage;

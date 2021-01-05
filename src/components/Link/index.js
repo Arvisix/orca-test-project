@@ -1,13 +1,11 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
-const Link = props => {
-    return (
-        <a {...props}>{props.children}</a>
-    )
-}
+const Link = (props) => {
+  return <a {...props}>{props.children}</a>;
+};
 
 const StyledLink = styled(Link)`
-    color: yellow;
+  color: yellow;
 `;
 
-export default StyledLink
+export default StyledLink;

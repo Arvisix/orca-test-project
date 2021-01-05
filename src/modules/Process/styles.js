@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-export const AppWrapper = styled.div `
+export const AppWrapper = styled.div`
   text-align: center;
 `;
 
@@ -17,4 +17,4 @@ export const AppHeader = styled.header`
 
 export const AppLink = styled.a`
   color: #61dafb;
-`
+`;

@@ -1,1 +1,1 @@
-export const processPath = id => `/process/${id}`;
+export const processPath = (id) => `/process/${id}`;

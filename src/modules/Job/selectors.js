@@ -1,1 +1,1 @@
-export const getJobs = state => state.jobsReducer.jobs
+export const getJobs = (state) => state.jobsReducer.jobs;

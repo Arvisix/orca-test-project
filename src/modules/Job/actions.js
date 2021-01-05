@@ -5,3 +5,8 @@ export const jobsPageLoaded = (id) => ({
   type: JOBS_PAGE_LOADED,
   payload: id,
 });
+
+export const setJobs = (jobs) => ({
+  type: SET_JOBS,
+  payload: jobs,
+});

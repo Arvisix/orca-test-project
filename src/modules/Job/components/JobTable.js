@@ -2,8 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useTable, useFilters } from "react-table";
 
-import ColumnFilter from '../../../components/Table/ColumnFilter'
-import { getJobs } from '../selectors';
+import ColumnFilter from "../../../components/Table/ColumnFilter";
+import { getJobs } from "../selectors";
 
 const JobTable = () => {
   const columns = React.useMemo(
@@ -21,7 +21,7 @@ const JobTable = () => {
       {
         Header: "Name",
         accessor: "name",
-        Filter: ColumnFilter
+        Filter: ColumnFilter,
       },
       {
         Header: "Status",
@@ -32,7 +32,7 @@ const JobTable = () => {
     []
   );
 
-  const data = useSelector(getJobs)
+  const data = useSelector(getJobs);
 
   const {
     getTableProps,
@@ -50,7 +50,7 @@ const JobTable = () => {
             {headerGroup.headers.map((column) => (
               <th {...column.getHeaderProps()}>
                 {column.render("Header")}
-                <div>{column.canFilter ? column.render('Filter') : null}</div>
+                <div>{column.canFilter ? column.render("Filter") : null}</div>
               </th>
             ))}
           </tr>

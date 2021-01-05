@@ -1,6 +1,5 @@
 import { put, takeLatest, take } from "redux-saga/effects";
 import { eventChannel } from "redux-saga";
-import { push } from "connected-react-router";
 import { v4 as uuid } from "uuid";
 import faker from "faker";
 
@@ -9,17 +8,17 @@ import {
   DELETE_PROCESS_BUTTON_CLICKED,
   PROCESSES_PAGE_LOADED,
   ADD_NEW_PROCESS,
-  SET_PROCESSES,
   ADD_NEW_PROCESS_BUTTON_CLICKED,
+  setProcesses,
 } from "./actions";
 
 const ref = firebase.firestore().collection("processes");
 
-function* deleteProcess(action) {
+export function* deleteProcess(action) {
   yield ref.doc(action.payload).delete();
 }
 
-function* syncProcesses() {
+export function* syncProcesses() {
   const channel = eventChannel((emit) => ref.onSnapshot(emit));
 
   try {
@@ -27,18 +26,18 @@ function* syncProcesses() {
       const data = yield take(channel);
       const processes = data.docs.map((doc) => doc.data());
 
-      yield put({ type: SET_PROCESSES, payload: processes });
+      yield put(setProcesses(processes));
     }
   } catch (err) {
     console.log(err);
   }
 }
 
-function* addProcess({ payload }) {
+export function* addProcess({ payload }) {
   yield ref.doc(payload.id).set(payload);
 }
 
-function* randomizeProcess() {
+export function* randomizeProcess() {
   const id = uuid();
   const name = faker.lorem.word();
   const startTime = Date.now();

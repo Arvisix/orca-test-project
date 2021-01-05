@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 
 import Button from "../../../components/Button";
-import { addNewProcessButtonClicked } from '../actions'
+import { addNewProcessButtonClicked } from "../actions";
 
 const NewProcessButton = () => {
   const dispatch = useDispatch();
